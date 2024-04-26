@@ -1,0 +1,113 @@
+Step 1: Create IAM User:
+Begin by accessing your AWS account and navigating to the Identity and Access Management (IAM) service. Once in IAM, locate the ‘Users’ section. Here, take the following steps to create a new IAM User:
+
+Click on ‘Users’ in the IAM dashboard.
+Look for the ‘Create user’ button and click on it to initiate the process of setting up a new IAM User.
+
+Provide the IAM username:
+
+Click on next.
+
+Choose Attach policies directly.
+
+Permission policies: Attach the AmazonS3FullAccess.
+
+Click on next.
+
+Review and create:
+
+Click on Create user.
+
+
+User, day89 has been created.
+
+Step 2: Creating IAM User Credentials:
+Click on the User, which you just now created.
+
+Click on Security Credentials, where you would see the Access keys, click on Create access key.
+
+Choose Command Line Interface (CLI).
+
+Click on the confirmation bar.
+
+Tag your credentials.
+
+Click on Create access key.
+
+
+Access Key and Secret key would be generated, scroll down, download them to save it.
+
+Step 3: Create and Lauch EC2 instance.
+Now create t2.micro EC2 instance, and ssh into it.
+
+
+Install the AWS CLI:
+
+sudo apt-get update #updating the package list
+sudo apt-get install awscli #installing aws cli
+aws --version # verifying the installing
+
+Configuring the AWS Account:
+
+Run the below command to your aws cli:
+
+aws configure
+Then enter your Aws Access Key ID, AWS Secret Access Key, Default region name and Default output format.
+
+
+You have successfully configured your AWS CLI.
+
+In order to check your configuration, run the below command:
+
+aws s3 ls
+It will list all the s3 buckets created in your AWS account.
+
+
+Step 4: Creating S3 Bucket through AWS CLI:
+Run the below command to create the s3 bucket using aws cli:
+
+aws s3api create-bucket --bucket your-unique-bucket-name --region your-preferred-region
+Replace the following values with your desired values:
+
+your-unique-bucket-name
+your-preferred-region
+Just for example lets create a bucket with name day8901152024, run the below command:
+
+aws s3api create-bucket --bucket day8901152024 --region us-east-1
+
+You can verify by opening your AWS account, S3 Buckets.
+
+
+Step 5: Create and Upload:
+Create a folder and inside folder create files:
+
+mkdir day89
+cd day89
+touch 1.txt
+touch 2.txt
+
+Upload:
+
+Run the command to upload:
+
+aws s3 sync your-local-folder s3://your-s3-bucket-name
+Replace your-local-folder with the path to the local folder you want to upload, get the path by running the pwd command.
+Replace your-s3-bucket-name with the name of your S3 bucket.
+
+In order to verify the contents has been uploaded you either visit your AWS account or run the below command:
+
+
+aws s3 ls s3://your-unique-bucket-name
+
+Step 6: Downloading the file contents from AWS S3 bucket.
+Run the below command:
+
+aws s3 cp s3://your-s3-bucket-name/your-object-key /path/to/local/directory
+Replace your-s3-bucket-name with the name of your S3 bucket.
+Replace your-object-key with the key of the object (file) you want to download from the bucket.
+Replace /path/to/local/directory with the local directory where you want to save the downloaded file.
+Create a new directory and get a path to that directory then run the below command.
+
+reference---- Abhiraj Thakur blogs
+
+
